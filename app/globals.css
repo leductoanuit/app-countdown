@@ -48,3 +48,15 @@ body {
   0% { transform: translateY(-10vh) rotate(0deg); opacity: 0.8; }
   100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
 }
+
+/* Lì xì envelope animations */
+@keyframes wobble {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-5deg); }
+  75% { transform: rotate(5deg); }
+}
+
+@keyframes blessing-reveal {
+  0% { opacity: 0; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1); text-shadow: 0 0 20px var(--tet-glow-gold); }
+}
