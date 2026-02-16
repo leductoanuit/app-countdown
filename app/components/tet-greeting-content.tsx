@@ -4,6 +4,9 @@ const WISHES = [
   "Phúc – Lộc – Thọ",
   "An Khang Thịnh Vượng",
   "Vạn Sự Như Ý",
+  "Mã Đáo Thành Công",
+  "Ngũ Phúc Lâm Môn",
+  "Tấn Tài Tấn Lộc",
 ];
 
 /* Staggered fade-in delay per section (in ms) */
