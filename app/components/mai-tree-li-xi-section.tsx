@@ -1,28 +1,45 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback } from "react";
 import MaiTree from "./mai-tree";
 import LiXiEnvelope from "./li-xi-envelope";
 
-/* Vietnamese New Year blessings — 7 options, 6 used per visit */
+/* 20 Vietnamese New Year blessings — shuffle 10 per session */
 const BLESSINGS = [
+  "Sức Khỏe Dồi Dào",
+  "Năm Mới Dồi Dào Sức Khỏe",
+  "Sống Lâu Trăm Tuổi",
+  "Trường Thọ Khang Ninh",
+  "Tài Lộc Đầy Nhà",
   "Phát Tài Phát Lộc",
+  "Tấn Tài Tấn Lộc",
+  "Năm Mới Tấn Tài Tấn Lộc",
+  "Vạn Sự Hanh Thông",
+  "Tiền Vô Như Nước",
   "An Khang Thịnh Vượng",
   "Vạn Sự Như Ý",
-  "Sức Khỏe Dồi Dào",
-  "Năm Mới Phát Tài",
-  "Tấn Tài Tấn Lộc",
+  "Năm Mới Toàn Gia Bình An",
   "Cung Chúc Tân Xuân",
+  "Thăng Quan Tiến Chức",
+  "Công Thành Danh Toại",
+  "Vui Vẻ Hạnh Phúc",
+  "Gia Đình Sum Vầy",
+  "Học Tập Tốt, Tiến Bộ",
+  "Chúc Hay Ăn Chóng Lớn",
 ];
 
-/* Envelope positions (%) aligned to mai tree branch endpoints (SVG viewBox 400x500) */
+/* 10 envelope positions aligned to redesigned tree branch tips */
 const ENVELOPE_POSITIONS = [
-  { top: "22%", left: "30%" },  // upper-left branch
-  { top: "18%", left: "68%" },  // upper-right branch
-  { top: "38%", left: "20%" },  // mid-left branch
-  { top: "35%", left: "78%" },  // mid-right branch
-  { top: "52%", left: "38%" },  // lower-left twig
-  { top: "50%", left: "62%" },  // lower-right twig
+  { top: "18%", left: "27%" },  // upper-left branch tip
+  { top: "12%", left: "45%" },  // center-top branch tip
+  { top: "18%", left: "72%" },  // upper-right branch tip
+  { top: "30%", left: "17%" },  // mid-left branch
+  { top: "28%", left: "38%" },  // mid-left inner
+  { top: "28%", left: "62%" },  // mid-right inner
+  { top: "30%", left: "83%" },  // mid-right branch
+  { top: "45%", left: "22%" },  // lower-left sub-branch
+  { top: "42%", left: "50%" },  // lower-center
+  { top: "45%", left: "78%" },  // lower-right sub-branch
 ];
 
 /* Fisher-Yates shuffle — returns new array */
@@ -38,16 +55,15 @@ function shuffle<T>(arr: T[]): T[] {
 export default function MaiTreeLiXiSection() {
   const [pickedId, setPickedId] = useState<number | null>(null);
 
-  /* Shuffle blessings on mount, take first 6 for 6 envelopes */
-  const shuffledBlessings = useMemo(() => shuffle(BLESSINGS).slice(0, 6), []);
+  /* Shuffle blessings on mount, take first 10 for 10 envelopes */
+  const shuffledBlessings = useMemo(() => shuffle(BLESSINGS).slice(0, 10), []);
 
-  const handlePick = (id: number) => {
-    if (pickedId === null) setPickedId(id);
-  };
+  const handlePick = useCallback((id: number) => {
+    setPickedId((prev) => (prev === null ? id : prev));
+  }, []);
 
   return (
     <section className="w-full py-12 text-center">
-      {/* Section heading */}
       <h2
         className="text-2xl md:text-4xl font-bold text-tet-gold-primary mb-2"
         style={{ animation: "glow 3s ease-in-out infinite" }}
@@ -58,12 +74,10 @@ export default function MaiTreeLiXiSection() {
         Chọn một phong bao để nhận lời chúc may mắn
       </p>
 
-      {/* Tree + envelopes container */}
-      <div className="relative mx-auto w-full max-w-sm md:max-w-md aspect-[4/5]">
-        {/* Mai tree backdrop */}
+      {/* Tree + envelopes container — wider for 10 envelopes */}
+      <div className="relative mx-auto w-full max-w-md md:max-w-lg aspect-[4/5]">
         <MaiTree className="absolute inset-0 w-full h-full" />
 
-        {/* Envelopes positioned on branches */}
         {ENVELOPE_POSITIONS.map((pos, i) => (
           <LiXiEnvelope
             key={i}
@@ -77,7 +91,7 @@ export default function MaiTreeLiXiSection() {
         ))}
       </div>
 
-      {/* Picked blessing display — larger text below tree */}
+      {/* Picked blessing display */}
       {pickedId !== null && (
         <div
           className="mt-8"
