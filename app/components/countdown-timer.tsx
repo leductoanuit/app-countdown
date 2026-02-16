@@ -1,28 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
-
-interface TimeLeft {
-  days: number;
-  hours: number;
-  minutes: number;
-  seconds: number;
-}
-
-/* Target: Tết Bính Ngọ - Feb 17, 2026 00:00:00 Vietnam time (UTC+7) */
-const TARGET_DATE = new Date("2026-02-17T00:00:00+07:00");
-
-function calculateTimeLeft(): TimeLeft | null {
-  const difference = TARGET_DATE.getTime() - Date.now();
-  if (difference <= 0) return null;
-
-  return {
-    days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-    hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-    minutes: Math.floor((difference / (1000 * 60)) % 60),
-    seconds: Math.floor((difference / 1000) % 60),
-  };
-}
+import type { TimeLeft } from "@/app/hooks/use-tet-countdown";
 
 const TIME_UNITS: { key: keyof TimeLeft; label: string }[] = [
   { key: "days", label: "Ngày" },
@@ -31,48 +9,12 @@ const TIME_UNITS: { key: keyof TimeLeft; label: string }[] = [
   { key: "seconds", label: "Giây" },
 ];
 
-export default function CountdownTimer() {
-  const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(null);
-  const [mounted, setMounted] = useState(false);
+interface CountdownTimerProps {
+  timeLeft: TimeLeft;
+}
 
-  useEffect(() => {
-    setMounted(true);
-    setTimeLeft(calculateTimeLeft());
-
-    const timer = setInterval(() => {
-      setTimeLeft(calculateTimeLeft());
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
-
-  /* Avoid hydration mismatch — render nothing until client-mounted */
-  if (!mounted) return null;
-
-  /* Celebration state: countdown reached zero */
-  if (timeLeft === null) {
-    return (
-      <div
-        className="text-center space-y-6"
-        style={{ animation: "fadeIn 1s ease-out" }}
-      >
-        <h1
-          className="text-4xl md:text-7xl font-bold text-tet-gold-primary"
-          style={{ animation: "glow 2s ease-in-out infinite" }}
-        >
-          🐴 Chúc Mừng Năm Mới! 🐴
-        </h1>
-        <p className="text-2xl md:text-4xl text-tet-red-primary font-semibold">
-          Tết Bính Ngọ 2026
-        </p>
-        <p className="text-lg md:text-xl text-tet-gold-secondary">
-          Happy Lunar New Year &mdash; Year of the Horse!
-        </p>
-      </div>
-    );
-  }
-
-  /* Active countdown */
+/** Presentational countdown — receives timeLeft from parent via hook */
+export default function CountdownTimer({ timeLeft }: CountdownTimerProps) {
   return (
     <div
       className="text-center space-y-10"

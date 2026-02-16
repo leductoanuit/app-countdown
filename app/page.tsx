@@ -1,20 +1,34 @@
+"use client";
+
 import Link from "next/link";
+import { useTetCountdown } from "./hooks/use-tet-countdown";
 import CountdownTimer from "./components/countdown-timer";
 import FallingParticles from "./components/falling-particles";
+import FireworksConfetti from "./components/fireworks-confetti";
 import MaiTreeLiXiSection from "./components/mai-tree-li-xi-section";
+import TetGreetingContent from "./components/tet-greeting-content";
 
 export default function Home() {
+  const { timeLeft, isTet, mounted } = useTetCountdown();
+
+  /* Avoid hydration mismatch — render nothing until client-mounted */
+  if (!mounted) return null;
+
   return (
     <div className="relative min-h-screen flex flex-col items-center px-4 overflow-hidden">
-      {/* Decorative falling flowers — background layer */}
-      <FallingParticles />
+      {/* Background layer: fireworks when Tet, falling flowers otherwise */}
+      {isTet ? <FireworksConfetti /> : <FallingParticles />}
 
-      {/* Countdown section — centered in viewport */}
+      {/* Main content — centered in viewport */}
       <main className="relative z-10 w-full max-w-4xl flex-1 flex items-center justify-center">
-        <CountdownTimer />
+        {isTet ? (
+          <TetGreetingContent />
+        ) : (
+          timeLeft && <CountdownTimer timeLeft={timeLeft} />
+        )}
       </main>
 
-      {/* Lì xì section — below countdown */}
+      {/* Lì xì section */}
       <section className="relative z-10 w-full max-w-4xl pb-16">
         <MaiTreeLiXiSection />
       </section>
