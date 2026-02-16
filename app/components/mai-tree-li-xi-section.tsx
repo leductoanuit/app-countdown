@@ -4,28 +4,51 @@ import { useState, useMemo, useCallback } from "react";
 import MaiTree from "./mai-tree";
 import LiXiEnvelope from "./li-xi-envelope";
 
-/* 20 Vietnamese New Year blessings — shuffle 10 per session */
+/* Vietnamese New Year blessings — shuffle 10 per session */
 const BLESSINGS = [
+  // Sức khỏe & trường thọ
   "Sức Khỏe Dồi Dào",
   "Năm Mới Dồi Dào Sức Khỏe",
   "Sống Lâu Trăm Tuổi",
   "Trường Thọ Khang Ninh",
+  "Mạnh Khỏe Bình An",
+  // Tài lộc & thịnh vượng
   "Tài Lộc Đầy Nhà",
   "Phát Tài Phát Lộc",
   "Tấn Tài Tấn Lộc",
   "Năm Mới Tấn Tài Tấn Lộc",
-  "Vạn Sự Hanh Thông",
   "Tiền Vô Như Nước",
+  "Buôn May Bán Đắt",
+  "Làm Ăn Phát Đạt",
+  "Kim Ngọc Mãn Đường",
+  // May mắn & hanh thông
+  "Vạn Sự Hanh Thông",
   "An Khang Thịnh Vượng",
   "Vạn Sự Như Ý",
-  "Năm Mới Toàn Gia Bình An",
   "Cung Chúc Tân Xuân",
+  "Xuân Sang Phú Quý",
+  "Ngũ Phúc Lâm Môn",
+  "Phước Lộc Song Toàn",
+  // Sự nghiệp & thành công
   "Thăng Quan Tiến Chức",
   "Công Thành Danh Toại",
+  "Mã Đáo Thành Công",
+  "Thuận Buồm Xuôi Gió",
+  "Sự Nghiệp Thăng Tiến",
+  // Gia đình & hạnh phúc
   "Vui Vẻ Hạnh Phúc",
   "Gia Đình Sum Vầy",
+  "Năm Mới Toàn Gia Bình An",
+  "Gia Đạo Hưng Thịnh",
+  "Trăm Năm Hạnh Phúc",
+  "Sum Vầy Bên Nhau",
+  // Tình yêu & nhân duyên
+  "Tình Duyên Mỹ Mãn",
+  "Sớm Tìm Được Ý Trung Nhân",
+  // Học tập & trẻ em
   "Học Tập Tốt, Tiến Bộ",
   "Chúc Hay Ăn Chóng Lớn",
+  "Học Hành Đỗ Đạt",
 ];
 
 /* 10 envelope positions aligned to redesigned tree branch tips */
