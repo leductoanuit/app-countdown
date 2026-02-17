@@ -16,7 +16,7 @@ export default function MomoQrLiXi({ className = "" }: MomoQrLiXiProps) {
         className="text-lg font-bold text-tet-gold-primary mb-3"
         style={{ textShadow: "0 0 12px var(--tet-glow-gold)" }}
       >
-        Lì xì cho chủ nhà nhé!
+        Xin ít lì xì 🫣
       </p>
 
       <Image
