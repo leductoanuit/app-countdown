@@ -1,3 +1,5 @@
+import MomoQrLiXi from "./momo-qr-li-xi";
+
 interface FortuneCategory {
   name: string;
   icon: string;
@@ -62,6 +64,8 @@ export default function FortuneResult({ categories, summary, onReset }: FortuneR
           Xem lại cho người khác
         </button>
       </div>
+
+      <MomoQrLiXi className="mt-6" />
     </div>
   );
 }
