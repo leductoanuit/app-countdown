@@ -3,7 +3,6 @@
 import { useState, useMemo, useCallback } from "react";
 import MaiTree from "./mai-tree";
 import LiXiEnvelope from "./li-xi-envelope";
-import MomoQrLiXi from "./momo-qr-li-xi";
 
 /* Vietnamese New Year blessings — shuffle 10 per session */
 const BLESSINGS = [
@@ -127,7 +126,6 @@ export default function MaiTreeLiXiSection() {
           >
             ✨ {shuffledBlessings[pickedId]} ✨
           </p>
-          <MomoQrLiXi className="mt-6" />
         </div>
       )}
     </section>
