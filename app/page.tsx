@@ -7,6 +7,7 @@ import FallingParticles from "./components/falling-particles";
 import FireworksConfetti from "./components/fireworks-confetti";
 import MaiTreeLiXiSection from "./components/mai-tree-li-xi-section";
 import TetGreetingContent from "./components/tet-greeting-content";
+import LunarDateHeader from "./components/lunar-date-header";
 
 export default function Home() {
   const { timeLeft, isTet, mounted } = useTetCountdown();
@@ -16,6 +17,9 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen flex flex-col items-center px-4 overflow-hidden">
+      {/* Lunar calendar date */}
+      <LunarDateHeader />
+
       {/* Background layer: fireworks when Tet, falling flowers otherwise */}
       {isTet ? <FireworksConfetti /> : <FallingParticles />}
 

@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@dqcai/vn-lunar':
+        specifier: ^1.0.1
+        version: 1.0.1
       '@google/generative-ai':
         specifier: ^0.24.1
         version: 0.24.1
@@ -118,6 +121,10 @@ packages:
   '@babel/types@7.29.0':
     resolution: {integrity: sha512-LwdZHpScM4Qz8Xw2iKSzS+cfglZzJGvofQICy7W7v4caru4EaAmyUuO6BGrbyQ2mYV11W0U8j5mBhd14dd3B0A==}
     engines: {node: '>=6.9.0'}
+
+  '@dqcai/vn-lunar@1.0.1':
+    resolution: {integrity: sha512-JucGjy32oZvUnfzsx00niG4jc1szlvxV2inQECfQ1j83Y6YB0V4lFuj1piVbaCsWCe1B8FTktyGpgH8IgVg98w==}
+    engines: {node: '>=14.0.0'}
 
   '@emnapi/core@1.8.1':
     resolution: {integrity: sha512-AvT9QFpxK0Zd8J0jopedNm+w/2fIzvtPKPjqyw9jwvBaReTTqPBk9Hixaz7KbjimP+QNz605/XnjFcDAL2pqBg==}
@@ -2014,6 +2021,8 @@ snapshots:
     dependencies:
       '@babel/helper-string-parser': 7.27.1
       '@babel/helper-validator-identifier': 7.28.5
+
+  '@dqcai/vn-lunar@1.0.1': {}
 
   '@emnapi/core@1.8.1':
     dependencies:
